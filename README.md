@@ -75,7 +75,6 @@ RAG 实际顺序：
 │  ├─ .env.example             无真实密钥的配置模板
 │  └─ pyproject.toml / uv.lock  Python 依赖与锁文件
 ├─ dietitian-ui/               Vue 前端
-├─ tools/check_public_files.py  上传前文件检查
 ├─ docker-compose.milvus.yml    本地 Milvus / etcd / MinIO
 ├─ start-project.ps1            已准备好环境后的 Windows 启动脚本
 └─ .runtime/                   本机数据、日志、索引和进程 ID（不提交）
@@ -397,9 +396,6 @@ MongoDB 默认数据库 `dietitian`（可用 `USER_MEMORY_DATABASE` 修改），
 ## 测试与构建
 
 ```powershell
-# 根目录：检查 Git 将收录的文件（不显示密钥值）
-.\dietitian\.venv-win\Scripts\python.exe -X utf8 tools/check_public_files.py
-
 # 后端
 cd dietitian
 .\.venv-win\Scripts\python.exe -m unittest discover -s tests -q
@@ -422,7 +418,6 @@ pnpm.cmd build
 git init
 git branch -M main
 git add .
-.\dietitian\.venv-win\Scripts\python.exe -X utf8 tools/check_public_files.py
 git status --short
 git diff --cached --stat
 git diff --cached
@@ -436,7 +431,7 @@ git remote add origin https://github.com/<你的GitHub用户名>/<仓库名>.git
 git push -u origin main
 ```
 
-检查脚本提供本地凭证值与常见敏感模式检测，不能保证识别所有隐私，也不检查完整历史和图片内容。若密钥曾进入提交、公开链接或他人可访问的日志，应先在服务商控制台撤销并重建，再清理仓库历史；只删文件或改成私有仓库不能使已泄露密钥失效。
+上传前还需检查提交历史和图片中的个人信息。若密钥曾进入提交、公开链接或他人可访问的日志，应先在服务商控制台撤销并重建，再清理仓库历史；只删文件或改成私有仓库不能使已泄露密钥失效。
 
 GitHub 仓库不应包含自己的 COS 数据、MongoDB 备份或用户档案。运行时，图片/命中资料/对话可能发送到你配置的模型、搜索和存储服务；这与“代码仓库未泄露”是不同边界。当前 API、CORS、上传签名与浏览器身份机制面向本地开发，公开部署前需补齐认证、访问控制及费用限制。
 
