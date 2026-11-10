@@ -1,0 +1,65 @@
+# Credentials: commit examples only, never local overrides.
+.env
+.env.*
+!.env.example
+!.env.template
+*.env
+!*.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account*.json
+.aws/
+.ssh/
+
+# Local runtime contains chat history, user profiles, logs, downloads and indexes.
+.runtime/
+**/.runtime/
+logs/
+*.log
+*.pid
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+dump/
+backups/
+uploads/
+attachments/
+
+# Private knowledge sources are opt-in. Share only reviewed synthetic examples.
+/dietitian/knowledge/documents/
+/dietitian/knowledge/sources.json
+
+# Environments and generated dependencies/builds.
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+node_modules/
+.pnpm-store/
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# Local IDE/assistant state and OS metadata.
+.idea/
+.vscode/
+.codex/
+.agents/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*.bak
+*.tmp
